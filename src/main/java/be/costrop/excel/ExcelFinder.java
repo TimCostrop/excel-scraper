@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -19,8 +20,7 @@ import java.util.stream.Stream;
 
 public class ExcelFinder {
     public List<ExcelFileInfo> search() {
-//        return Arrays.stream(File.listRoots())
-        return Stream.of(new File("/home/tim/"))
+        return Arrays.stream(File.listRoots())
                 .map(File::toPath)
                 .flatMap(this::walkThroughPath)
                 .filter(Files::isRegularFile)
