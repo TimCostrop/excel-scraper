@@ -67,9 +67,8 @@ public class ExcelFinder {
                 case XLSX -> extractAuthorViaXssf(path.path());
                 case XLS -> extractAuthorViaHssf(path.path());
             };
-            return optionalAuthor.orElseThrow(NoSuchElementException::new);
+            return optionalAuthor.orElse("");
         } catch (Exception e) {
-            System.err.printf("Could not find author for %s%n", path.toString());
             return "";
         }
     }
