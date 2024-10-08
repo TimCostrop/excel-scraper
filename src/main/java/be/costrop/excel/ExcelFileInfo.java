@@ -19,4 +19,8 @@ public record ExcelFileInfo(
                 .filter(StringUtils::isNotBlank)
                 .orElse("No author found");
     }
+
+    public String id() {
+        return fullPath.toString().replaceAll("[/\\\\]", "_");
+    }
 }

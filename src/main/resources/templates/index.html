@@ -5,20 +5,30 @@
     <title>Excel-scraping</title>
 
     <style>
-        div {
-            display: flex;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        div[data-path]:hover:after {
-            content: attr(data-path);
-            display: block;
-            position: absolute;
-            background: black;
-            color: white;
-            padding: 5px;
-            border-radius: 1px;
-            top: 0;
-            left: -50%;
+        div {
+            position: relative;
+            padding: .2rem;
+            margin-left: 2rem;
+
+            [data-path]:hover {
+                :after {
+                    content: attr(data-path);
+                    display: block;
+                    position: absolute;
+                    background: black;
+                    color: white;
+                    padding: 5px;
+                    border-radius: 1px;
+                    top: 0;
+                    left: -50%;
+                }
+            }
         }
     </style>
 </head>
@@ -28,10 +38,11 @@
     <div th:data-path="${excelFile.fullPath()}" th:each="excelFile: ${excelsFoundOnDevice}">
         <input th:name="${excelFile.fullPath()}"
                th:value="${excelFile.fullPath()}"
+               th:id="${excelFile.id()}"
                type="checkbox">
-        <label th:for="${excelFile.fullPath()}"
-               th:text="${excelFile.name() + ' by ' + excelFile.author()}"/>
-
+        <label th:for="${excelFile.id   ()}"
+               th:text="${excelFile.name() + ' by ' + excelFile.author()}"
+        />
     </div>
 
     <button type="submit">DELETE</button>
