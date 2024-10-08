@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Excel-scraping</title>
+
+    <style>
+        div {
+            display: flex;
+        }
+
+        div[data-path]:hover:after {
+            content: attr(data-path);
+            display: block;
+            position: absolute;
+            background: black;
+            color: white;
+            padding: 5px;
+            border-radius: 1px;
+            top: 0;
+            left: -50%;
+        }
+    </style>
+</head>
+<body>
+
+<form>
+    <div th:data-path="${excelFile.fullPath()}" th:each="excelFile: ${excelsFoundOnDevice}">
+        <input th:name="${excelFile.fullPath()}"
+               th:value="${excelFile.fullPath()}"
+               type="checkbox">
+        <label th:for="${excelFile.fullPath()}"
+               th:text="${excelFile.name() + ' by ' + excelFile.author()}"/>
+
+    </div>
+
+    <button type="submit">DELETE</button>
+</form>
+
+</body>
+</html>
