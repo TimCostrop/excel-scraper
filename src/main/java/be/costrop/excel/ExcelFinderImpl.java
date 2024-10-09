@@ -1,5 +1,6 @@
 package be.costrop.excel;
 
+import be.costrop.controller.dto.DeleteFileRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.hpsf.PropertySet;
@@ -25,10 +26,18 @@ public class ExcelFinderImpl implements ExcelFinder {
 
     private static List<ExcelFileInfo> foundFiles;
 
-    public List<ExcelFileInfo> search() {
+    public List<ExcelFileInfo> getSearchResults() {
         if (foundFiles == null)
             foundFiles = performSearch();
         return foundFiles;
+    }
+
+    @Override
+    public void deleteFiles(List<DeleteFileRequest> deleteFileRequests) {
+        log.info("I want to delete files {}", deleteFileRequests);
+
+        // clear the cached files.
+        foundFiles = performSearch();
     }
 
     private List<ExcelFileInfo> performSearch() {
